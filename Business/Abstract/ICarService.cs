@@ -5,16 +5,11 @@ using System.Text;
 
 namespace Business.Abstract
 {
-    public interface ICarService
+    public interface ICarService:IEntityServiceRepository<Car>
     {
-        void Add(Car car);
-        void Update(Car car);
-        void Delete(Car car);
-
-        List<Car> GetAll();
-        List<Car> GetAllByBrandId(int brandId);
-        List<Car> GetAllByColorId(int colorId);
-        List<Car> GetAllByModelYear(int modelYear);
-        List<Car> GetAllByDailyPrice(int dailyPrice);
+        List<Car> GetCarsByBrandId(int brandId);
+        List<Car> GetCarsByColorId(int colorId);
+        List<Car> GetCarsByModelYear(int modelYear);
+        List<Car> GetCarsByDailyPrice(int dailyPrice);
     }
 }

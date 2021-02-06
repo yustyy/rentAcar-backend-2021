@@ -16,14 +16,22 @@ namespace Business.Concrete
             _carDal = carDal;
         }
 
-        public void Add(Car car)
+        public void Add(Car entity)
         {
-            _carDal.Add(car);
+            if (entity.Description.Length >= 2 && entity.DailyPrice > 0)
+            {
+                _carDal.Add(entity);
+            }
+            else
+            {
+                Console.WriteLine("Bir hata oluştu lütfen girdiğiniz değerleri kontrol ediniz!");
+            }
+            
         }
 
-        public void Delete(Car car)
+        public void Delete(Car entity)
         {
-            _carDal.Delete(car);
+            _carDal.Delete(entity);
         }
 
         public List<Car> GetAll()
@@ -31,29 +39,34 @@ namespace Business.Concrete
             return _carDal.GetAll();
         }
 
-        public List<Car> GetAllByBrandId(int brandId)
+        public List<Car> GetCarsByColorId(int colorId)
         {
-            return _carDal.GetAllByBrandId(brandId);
+            return _carDal.GetAll(c => c.ColorId == colorId);
         }
 
-        public List<Car> GetAllByColorId(int colorId)
+        public Car GetById(int id)
         {
-            return _carDal.GetAllByColorId(colorId);
+            return _carDal.Get(c => c.CarId == id);
         }
 
-        public List<Car> GetAllByDailyPrice(int dailyPrice)
+        public List<Car> GetCarsByBrandId(int brandId)
         {
-            return _carDal.GetAllByDailyPrice(dailyPrice);
+            return _carDal.GetAll(c => c.BrandId == brandId);
         }
 
-        public List<Car> GetAllByModelYear(int modelYear)
+        public List<Car> GetCarsByDailyPrice(int dailyPrice)
         {
-            return GetAllByModelYear(modelYear);
+            return _carDal.GetAll(c => c.DailyPrice == dailyPrice);
         }
 
-        public void Update(Car car)
+        public List<Car> GetCarsByModelYear(int modelYear)
         {
-            _carDal.Update(car);
+            return _carDal.GetAll(c => c.ModelYear == modelYear);
+        }
+
+        public void Update(Car entity)
+        {
+            _carDal.Update(entity);
         }
     }
 }
