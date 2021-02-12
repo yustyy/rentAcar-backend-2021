@@ -13,25 +13,34 @@ namespace ConsoleUI
         {
             //TEST1();
 
+            TEST2();
+
+        }
+
+        private static void TEST2()
+        {
             ICarService carService = new CarManager(new EfCarDal());
             var result = carService.GetCarInfo();
 
-            foreach (var car in result)
+            if (result.Success)
             {
-                Console.WriteLine(car.CarId+" / "+car.BrandName+" / "+car.ColorName+" / "+car.ModelYear +" / "+car.DailyPrice+" / "+car.Description);
+                foreach (var car in result.Data)
+                {
+                    Console.WriteLine(car.CarId + " / " + car.BrandName + " / " + car.ColorName + " / " + car.ModelYear + " / " + car.DailyPrice + " / " + car.Description);
+                }
+                Console.WriteLine(result.Message);
             }
-
-
-
-
-
+            else
+            {
+                Console.WriteLine(result.Message);
+            }
         }
 
         private static void TEST1()
         {
             ICarService carService = new CarManager(new InMemoryCarDal());
 
-            foreach (var car in carService.GetCarsByBrandId(3))
+            foreach (var car in carService.GetCarsByBrandId(3).Data)
             {
                 Console.WriteLine(car.Description);
             }
@@ -42,7 +51,7 @@ namespace ConsoleUI
 
             carService.Add(newCar);
 
-            foreach (var car in carService.GetCarsByBrandId(3))
+            foreach (var car in carService.GetCarsByBrandId(3).Data)
             {
                 Console.WriteLine(car.Description);
             }
@@ -54,14 +63,14 @@ namespace ConsoleUI
             carService1.Add(araba1);
 
             Console.WriteLine("Araba idsi 3 olan arabalar");
-            foreach (var car in carService1.GetCarsByBrandId(3))
+            foreach (var car in carService1.GetCarsByBrandId(3).Data)
             {
                 Console.WriteLine(car.Description);
             }
 
             Console.WriteLine("------------------------");
             Console.WriteLine("Renk idsi 5 olan arabalar");
-            foreach (var car in carService1.GetCarsByColorId(5))
+            foreach (var car in carService1.GetCarsByColorId(5).Data)
             {
                 Console.WriteLine(car.Description);
             }
