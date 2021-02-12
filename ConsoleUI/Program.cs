@@ -12,9 +12,30 @@ namespace ConsoleUI
         static void Main(string[] args)
         {
             //TEST1();
+            //TEST2();
+            //YeniKullanıcı();
 
-            TEST2();
+            IRentalService rentalService = new RentalManager(new EfRentalDal());
+            rentalService.Add(new Rental { CarId = 1, CustomerId = 1, RentDate = DateTime.Now,ReturnDate=DateTime.MaxValue});
 
+            foreach (var result in rentalService.GetRentalInfo().Data)
+            {
+                Console.WriteLine(result.RentalId+" / "+result.BrandName+" / "+result.ColorName+" / "+result.ModelYear+" / "
+                    +result.DailyPrice+" / "+result.Description+" / "+result.UserName+" / "+result.UserLastName+" / "
+                    +result.UserMail+" / "+result.CompanyName+" / "+result.RentDate+" / "+result.ReturnDate);
+            }
+
+        }
+
+        private static void YeniKullanıcı()
+        {
+            IUserService userService = new UserManager(new EfUserDal());
+            userService.Add(new User { Email = "yusuf.acmaci@hotmail.com", FirstName = "Yusuf", LastName = "Açmacı", Password = "sifre123" });
+
+            foreach (var user in userService.GetAll().Data)
+            {
+                Console.WriteLine(user.FirstName);
+            }
         }
 
         private static void TEST2()
