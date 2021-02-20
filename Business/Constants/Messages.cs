@@ -18,7 +18,9 @@ namespace Business.Constants
 
         public static string CarAdded = "Araba eklendi";
 
-        public static string CarDescriptionOrDailyPriceInvalid = "Araba açıklaması 2 den büyük ve günlük ücreti 0 dan yüksek olmalıdır!";
+        public static string CarDescriptionInvalid = "Araba'nın açıklaması geçersiz!";
+
+        public static string CarDailyPriceInvalid = "Araba'nın günlük ücreti geçersiz!";
 
         public static string CarDeleted = "Araba silindi";
 
@@ -67,5 +69,34 @@ namespace Business.Constants
         public static string RentalUpdated = "Sipariş güncellendi";
 
         public static string RentalCarAlreadyInUse = "Sipariş edilemedi. Sipariş edilen araba kullanımda";
+
+        public static string BrandNameInvalid = "Marka ismi geçersiz!";
+
+        public static string CarBrandIdInvalid = "Araba marka id geçersiz!";
+
+        public static string CarColorIdInvalid = "Araba renk id geçersiz!";
+
+        public static string CarModelYearInvalid = "Araba model yılı geçersiz!";
+
+        public static string ColorNameInvalid = "Renk ismi geçersiz!";
+
+        public static string CustomerUserIdInvalid = "Müşteri kullanıcı id geçersiz!";
+
+        public static string RentalCarIdInvalid = "Kiralanan araba id geçersiz!";
+
+        public static string RentalCustomerIdInvalid = "Kiralanan müşteri id geçersiz!";
+
+        public static string RentalRentDateInvalid = "Kiralanan kira tarihi geçersiz!";
+
+        public static string RentalReturnDateInvalid = "Kiralanan kira dönüş tarihi id geçersiz!";
+
+        public static string UserEmailInvalid = "Kullanıcı email geçersiz!";
+
+        public static string UserFirstNameInvalid = "Kullanıcı ismi geçersiz!";
+
+        public static string UserLastNameInvalid = "Kullanıcı soyismi geçersiz!";
+
+        public static string UserPasswordInvalid = "Kullanıcı şifresi geçersiz!";
+
     }
 }

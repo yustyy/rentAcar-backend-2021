@@ -1,9 +1,13 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
+using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -19,19 +23,11 @@ namespace Business.Concrete
             _carDal = carDal;
         }
 
+        [ValidationAspect(typeof(CarValidator))]
         public IResult Add(Car entity)
         {
-            //Açıklama uzunlugu 2 den büyük ve günlük parası 0 dan yüksek mi?
-            if (entity.Description.Length>2 && entity.DailyPrice>0)
-            {
-                _carDal.Add(entity);
-                return new SuccessResult(Messages.CarAdded);
-            }
-            else
-            {
-                return new ErrorResult(Messages.CarDescriptionOrDailyPriceInvalid);
-            }
-            
+            _carDal.Add(entity);
+            return new SuccessResult(Messages.CarAdded);
         }
 
         public IResult Delete(Car entity)
@@ -70,6 +66,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(p => p.ModelYear == modelYear), Messages.CarsListed);
         }
 
+        [ValidationAspect(typeof(CarValidator))]
         public IResult Update(Car entity)
         {
             _carDal.Update(entity);
@@ -78,7 +75,7 @@ namespace Business.Concrete
 
         public IDataResult<List<CarInfoDto>> GetCarInfo()
         {
-            return new SuccessDataResult<List<CarInfoDto>>(_carDal.GetCarDetails(),Messages.CarsListed);
+            return new SuccessDataResult<List<CarInfoDto>>(_carDal.GetCarDetails(), Messages.CarsListed);
         }
     }
 }
