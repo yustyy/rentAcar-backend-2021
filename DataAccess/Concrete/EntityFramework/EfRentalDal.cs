@@ -26,7 +26,7 @@ namespace DataAccess.Concrete.EntityFramework
                              join co in context.Colors
                              on c.ColorId equals co.ColorId
                              join u in context.Users
-                             on cu.UserId equals u.UserId
+                             on cu.UserId equals u.Id
                              select new RentalInfoDto
                              {
                                  BrandName = b.Name,
