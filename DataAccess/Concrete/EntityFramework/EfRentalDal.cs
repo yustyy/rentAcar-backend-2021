@@ -16,33 +16,24 @@ namespace DataAccess.Concrete.EntityFramework
         {
             using (TestDBContext context = new TestDBContext())
             {
-                var result = from r in context.Rentals
+                var result = from r in  context.Rentals
                              join c in context.Cars
-                             on r.CarId equals c.CarId
+                             on r.CarId equals c.Id
                              join cu in context.Customers
-                             on r.CustomerId equals cu.CustomerId
+                             on r.CustomerId equals cu.Id
                              join b in context.Brands
-                             on c.BrandId equals b.BrandId
-                             join co in context.Colors
-                             on c.ColorId equals co.ColorId
+                             on c.BrandId equals b.Id
                              join u in context.Users
                              on cu.UserId equals u.Id
                              select new RentalInfoDto
                              {
-                                 BrandName = b.Name,
-                                 ColorName = co.Name,
-                                 CompanyName = cu.CompanyName,
-                                 DailyPrice = c.DailyPrice,
-                                 Description = c.Description,
-                                 ModelYear = c.ModelYear,
-                                 RentalId = r.RentalId,
-                                 RentDate = r.RentDate,
-                                 ReturnDate = r.ReturnDate,
-                                 UserLastName = u.LastName,
-                                 UserName = u.FirstName,
-                                 UserMail = u.Email
+                                 RentalId = r.Id,
+                                 CarName = b.Name,
+                                 CustomerName = u.FirstName + " " + u.LastName,
+                                 UserName = u.FirstName + " " + u.LastName,
+                                 RentDate = r.RentStartDate,
+                                 ReturnDate = r.ReturnDate
                              };
-
                 return result.ToList();
 
 

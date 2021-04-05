@@ -117,5 +117,8 @@ namespace Business.Constants
         public static string UserAlreadyExists = "Kullanıcı mevcut!";
 
         public static string AccessTokenCreated = "Token oluşturuldu!";
+        internal static string CarImageCountOfCarError;
+
+        public static string CarImageUpdated { get; internal set; }
     }
 }

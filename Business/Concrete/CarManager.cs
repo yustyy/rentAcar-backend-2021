@@ -26,7 +26,7 @@ namespace Business.Concrete
             _carDal = carDal;
         }
 
-        [SecuredOperation("car.add,admin")]
+        [SecuredOperation("car.add,moderator,admin")]
         [ValidationAspect(typeof(CarValidator))]
         [CacheRemoveAspect("ICarService.Get")]
         public IResult Add(Car entity)
@@ -35,6 +35,8 @@ namespace Business.Concrete
             return new SuccessResult(Messages.CarAdded);
         }
 
+        [SecuredOperation("car.delete,moderator,admin")]
+        [CacheRemoveAspect("ICarService.Get")]
         public IResult Delete(Car entity)
         {
             _carDal.Delete(entity);
@@ -42,12 +44,13 @@ namespace Business.Concrete
         }
 
         [CacheAspect]
-        [SecuredOperation("car.list,admin")]
+        //[SecuredOperation("car.list,admin")]
         public IDataResult<List<Car>> GetAll()
         {
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(), Messages.CarsListed);
         }
 
+        [CacheAspect]
         public IDataResult<List<Car>> GetCarsByColorId(int colorId)
         {
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.ColorId == colorId), Messages.CarsListed);
@@ -60,21 +63,25 @@ namespace Business.Concrete
             return new SuccessDataResult<Car>(_carDal.Get(c => c.CarId == id), Messages.CarListed);
         }
 
+        [CacheAspect]
         public IDataResult<List<Car>> GetCarsByBrandId(int brandId)
         {
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.BrandId == brandId), Messages.CarsListed);
         }
 
+        [CacheAspect]
         public IDataResult<List<Car>> GetCarsByDailyPrice(int dailyPrice)
         {
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.DailyPrice == dailyPrice), Messages.CarsListed);
         }
 
+        [CacheAspect]
         public IDataResult<List<Car>> GetCarsByModelYear(int modelYear)
         {
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(p => p.ModelYear == modelYear), Messages.CarsListed);
         }
 
+        [SecuredOperation("car.update,moderator,admin")]
         [ValidationAspect(typeof(CarValidator))]
         [CacheRemoveAspect("ICarService.Get")]
         public IResult Update(Car entity)
@@ -83,11 +90,13 @@ namespace Business.Concrete
             return new SuccessResult(Messages.CarUpdated);
         }
 
-        public IDataResult<List<CarInfoDto>> GetCarInfo()
+        [CacheAspect]
+        public IDataResult<List<CarInfoDto>> GetCarsInfo()
         {
-            return new SuccessDataResult<List<CarInfoDto>>(_carDal.GetCarDetails(), Messages.CarsListed);
+            return new SuccessDataResult<List<CarInfoDto>>(_carDal.GetCarsDetails(), Messages.CarsListed);
         }
 
+        [CacheAspect]
         public IDataResult<List<CarImagesDto>> GetAllImagesById(int id)
         {
             return new SuccessDataResult<List<CarImagesDto>>(_carDal.GetCarImageDetails(c=>c.CarId==id));
@@ -97,6 +106,18 @@ namespace Business.Concrete
         public IResult AddTransactionalTest(Car car)
         {
             return null;
+        }
+
+        [CacheAspect]
+        public IDataResult<List<CarInfoDto>> GetCarsInfoByBrandId(int brandId)
+        {
+            return new SuccessDataResult<List<CarInfoDto>>(_carDal.GetCarsInfoByBrandId(brandId));
+        }
+
+        [CacheAspect]
+        public IDataResult<List<CarInfoDto>> GetCarsInfoByColorId(int colorId)
+        {
+            return new SuccessDataResult<List<CarInfoDto>>(_carDal.GetCarsInfoByColorId(colorId));
         }
     }
 }

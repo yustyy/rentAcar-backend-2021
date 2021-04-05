@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
@@ -28,6 +29,8 @@ namespace Business.Concrete
             return new SuccessResult(Messages.CustomerAdded);
         }
 
+        [SecuredOperation("customer.delete,moderator,admin")]
+        [ValidationAspect(typeof(CustomerValidator))]
         public IResult Delete(Customer entity)
         {
             _customerDal.Delete(entity);
@@ -35,21 +38,25 @@ namespace Business.Concrete
             return new SuccessResult(Messages.CustomerDeleted);
         }
 
+        [SecuredOperation("customer.get,moderator,admin")]
         public IDataResult<List<Customer>> GetAll()
         {
             return new SuccessDataResult<List<Customer>>(_customerDal.GetAll(), Messages.CustomersListed);
         }
 
+        [SecuredOperation("customer.get,moderator,admin")]
         public IDataResult<Customer> GetById(int id)
         {
             return new SuccessDataResult<Customer>(_customerDal.Get(c => c.CustomerId == id),Messages.UserListed);
         }
 
+        [SecuredOperation("customer.get,moderator,admin")]
         public IDataResult<List<Customer>> GetByUserId(int userId)
         {
             return new SuccessDataResult<List<Customer>>(_customerDal.GetAll(c => c.UserId == userId), Messages.CustomersListed);
         }
 
+        [SecuredOperation("customer.update,moderator,admin")]
         [ValidationAspect(typeof(CustomerValidator))]
         public IResult Update(Customer entity)
         {

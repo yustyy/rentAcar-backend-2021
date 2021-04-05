@@ -1,19 +1,27 @@
-﻿using Core.Utilities.Results;
+﻿using System.Collections.Generic;
+using Core.Utilities.Results;
 using Entities.Concrete;
-using Entities.DTOs;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Business.Abstract
 {
-    public interface IRentalService:IEntityServiceRepository<Rental>
+    public interface IRentalService
     {
-        IDataResult<Rental> GetByCarId(int carId);
-        IDataResult<List<Rental>> GetByCustomerId(int customerId);
-        IDataResult<List<Rental>> GetByDate(DateTime rentDate, DateTime returnDate);
+        IDataResult<Rental> GetById(int id);
 
-        IDataResult<List<RentalInfoDto>> GetRentalInfo();
+        IDataResult<List<Rental>> GetAll();
 
+        IDataResult<List<Rental>> GetAllByCarId(int carId);
+
+        IResult Add(Rental rental);
+
+        IResult Update(Rental rental);
+
+        IResult Delete(Rental rental);
+
+        IResult CheckReturnDateByCarId(int carId);
+
+        IResult IsRentable(Rental rental);
+
+        IResult CheckFindeksScoreSufficiency(Rental rental);
     }
 }
