@@ -47,7 +47,7 @@ namespace Business.Concrete
         [SecuredOperation("customer.get,moderator,admin")]
         public IDataResult<Customer> GetById(int id)
         {
-            return new SuccessDataResult<Customer>(_customerDal.Get(c => c.CustomerId == id),Messages.UserListed);
+            return new SuccessDataResult<Customer>(_customerDal.Get(c => c.Id == id),Messages.UserListed);
         }
 
         [SecuredOperation("customer.get,moderator,admin")]

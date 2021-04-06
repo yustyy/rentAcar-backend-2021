@@ -4,7 +4,7 @@ using Entities.Concrete;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class EfCreditCardDal : EfEntityRepositoryBase<CreditCard, ReCapProjectContext>, ICreditCardDal
+    public class EfCreditCardDal : EfEntityRepositoryBase<CreditCard, TestDBContext>, ICreditCardDal
     {
     }
 }

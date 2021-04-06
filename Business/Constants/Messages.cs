@@ -117,8 +117,46 @@ namespace Business.Constants
         public static string UserAlreadyExists = "Kullanıcı mevcut!";
 
         public static string AccessTokenCreated = "Token oluşturuldu!";
-        internal static string CarImageCountOfCarError;
 
-        public static string CarImageUpdated { get; internal set; }
+        public static string CarImageCountOfCarError;
+
+        public static string creditCardAdded = "Kredi kartı eklendi!";
+
+        public static string CarImageUpdated = "Araba fotoğrafı güncellendi!";
+
+        public static string creditCardDeleted = "Kredi Kartı silindi!";
+
+        public static string FindeksAdded = "Findeks puanı eklendi!";
+
+        public static string FindeksUpdated = "Findeks puanı güncellendi!";
+
+        public static string FindeksDeleted = "Findeks puanı silindi!";
+
+        public static string RentalUndeliveredCar = "Araba teslim edilmedi!";
+
+        public static string RentalNotAvailable = "Seçtiğiniz araba belirlenen tarihler arasında kullanılabilir değil!";
+
+        public static string FindeksNotFound = "Findeks puanı bulunamadı!";
+
+        public static string FindeksNotEnoughForCar = "Findeks puanı yereli değil!";
+
+        public static string OperationClaimAdded = "Operasyon claimi eklendi!";
+
+        public static string OperationClaimUpdated = "Operasyon claimi güncellendi!";
+
+        public static string OperationClaimDeleted = "Operasyon claimi silindi!";
+
+        public static string UserOperationClaimAdded = "Kullanıcı operasyon claimi eklendi!";
+
+        public static string UserOperationClaimUpdated = "Kullanıcı operasyon claimi güncellendi!";
+
+        public static string UserOperationClaimDeleted = "Kullanıcı operasyon claimi silindi!";
+
+        public static string UserDetailsUpdated = "Kullanıcı detayı güncellendi!";
+
+        public static string PaymentSuccessful = "Ödeme başarılı!";
+
+        public static string PaymentFailed = "Ödeme başarısız!";
+
     }
 }

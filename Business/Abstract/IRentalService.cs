@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Core.Utilities.Results;
 using Entities.Concrete;
+using Entities.DTOs;
 
 namespace Business.Abstract
 {
@@ -23,5 +25,11 @@ namespace Business.Abstract
         IResult IsRentable(Rental rental);
 
         IResult CheckFindeksScoreSufficiency(Rental rental);
+
+        IDataResult<List<Rental>> GetByCustomerId(int id);
+
+        IDataResult<List<Rental>> GetByDate(DateTime rentDate, DateTime returnDate);
+
+        IDataResult<List<RentalInfoDto>> GetRentalInfo();
     }
 }

@@ -13,7 +13,7 @@ namespace Business.ValidationRules.FluentValidation
         {
             RuleFor(r => r.CarId).NotEmpty().WithMessage(Messages.RentalCarIdInvalid);
             RuleFor(r => r.CustomerId).NotEmpty().WithMessage(Messages.RentalCustomerIdInvalid);
-            RuleFor(r => r.RentDate).NotEmpty().WithMessage(Messages.RentalRentDateInvalid);
+            RuleFor(r => r.RentStartDate).NotEmpty().WithMessage(Messages.RentalRentDateInvalid);
             RuleFor(r => r.ReturnDate).NotEmpty().WithMessage(Messages.RentalReturnDateInvalid);
         }
     }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Business.Abstract;
 using Business.BusinessAspects.Autofac;
@@ -9,6 +10,7 @@ using Core.Utilities.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 
 namespace Business.Concrete
 {
@@ -37,9 +39,28 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Rental>>(_rentalDal.GetAll());
         }
 
+        [SecuredOperation("user,rental.get,moderator,admin")]
         public IDataResult<List<Rental>> GetAllByCarId(int carId)
         {
             return new SuccessDataResult<List<Rental>>(_rentalDal.GetAll(r => r.CarId == carId));
+        }
+
+        [SecuredOperation("user,rental.get,moderator,admin")]
+        public IDataResult<List<Rental>> GetByCustomerId(int id)
+        {
+            return new SuccessDataResult<List<Rental>>(_rentalDal.GetAll(r => r.CustomerId == id));
+        }
+
+        [SecuredOperation("user,rental.get,moderator,admin")]
+        IDataResult<List<Rental>> IRentalService.GetByDate(DateTime rentDate, DateTime returnDate)
+        {
+            return new SuccessDataResult<List<Rental>>(_rentalDal.GetAll(r => r.RentStartDate > rentDate && r.RentEndDate < returnDate));
+        }
+
+        [SecuredOperation("user,rental.get,moderator,admin")]
+        public IDataResult<List<RentalInfoDto>> GetRentalInfo()
+        {
+            return new SuccessDataResult<List<RentalInfoDto>>(_rentalDal.GetRentalInfo());
         }
 
         [SecuredOperation("user,rental.add,moderator,admin")]
@@ -102,5 +123,7 @@ namespace Business.Concrete
 
             return new SuccessResult();
         }
+
+        
     }
 }

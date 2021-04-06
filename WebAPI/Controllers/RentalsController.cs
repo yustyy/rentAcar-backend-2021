@@ -83,7 +83,7 @@ namespace WebAPI.Controllers
         [HttpPost("getbycarid")]
         public IActionResult GetByCarId(int id)
         {
-            var result = _rentalService.GetByCarId(id);
+            var result = _rentalService.GetAllByCarId(id);
 
             if (result.Success)
             {

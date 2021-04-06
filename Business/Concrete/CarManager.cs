@@ -60,7 +60,7 @@ namespace Business.Concrete
         //[PerformanceAspect(5)]
         public IDataResult<Car> GetById(int id)
         {
-            return new SuccessDataResult<Car>(_carDal.Get(c => c.CarId == id), Messages.CarListed);
+            return new SuccessDataResult<Car>(_carDal.Get(c => c.Id == id), Messages.CarListed);
         }
 
         [CacheAspect]
@@ -93,13 +93,13 @@ namespace Business.Concrete
         [CacheAspect]
         public IDataResult<List<CarInfoDto>> GetCarsInfo()
         {
-            return new SuccessDataResult<List<CarInfoDto>>(_carDal.GetCarsDetails(), Messages.CarsListed);
+            return new SuccessDataResult<List<CarInfoDto>>(_carDal.GetCarDetails(), Messages.CarsListed);
         }
 
         [CacheAspect]
         public IDataResult<List<CarImagesDto>> GetAllImagesById(int id)
         {
-            return new SuccessDataResult<List<CarImagesDto>>(_carDal.GetCarImageDetails(c=>c.CarId==id));
+            return new SuccessDataResult<List<CarImagesDto>>(_carDal.GetCarImageDetails(c=>c.Id==id));
         }
 
         //[TransactionScopeAspect]
